@@ -1,0 +1,4 @@
+node_modules/
+config.json
+package.json
+npm-debug.log
