@@ -1,0 +1,24 @@
+<script src="public/script/jquery.js"></script>
+<script>
+var test = { noun:
+   { syn:
+      [ 'grandma',
+        'grandmother',
+        'granny',
+        'grannie',
+        'gran',
+        'Nan',
+        'Nan River',
+        'bread',
+        'breadstuff',
+        'river',
+        'staff of life' ] } };
+
+        var results = [];
+        //bighugelabs
+        for(var k in test) {
+          console.log(test[k].syn);
+          results = results.concat(test[k].syn);
+        };
+        console.log(results);
+</script>
