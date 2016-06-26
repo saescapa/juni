@@ -13,13 +13,15 @@ var storage = require('node-persist'); //Storage to keep logs
 
 var config = require("./config.json");
 
-
 // const Synonymator = require("../");
 // const API_KEY = config.SynonymatorAPI;
 //
 // let syn = new Synonymator(API_KEY);
 
 var app = express();
+
+app.set('port', (process.env.PORT || 5000));
+
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
@@ -301,6 +303,6 @@ app.use('/*', function(req, res) {
   res.redirect('/');
 });
 
-app.listen(3000, function () {
-  console.log('Juni Running');
+app.listen(app.get('port'), function() {
+  console.log('Juni is running on port', app.get('port'));
 });
