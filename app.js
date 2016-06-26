@@ -220,7 +220,6 @@ app.use('/api/*/*', function(req, res) {
           url: api_url,
           json: true
       }, function (error, response, api_results) {
-        console.log(api_results);
         if (!error && response.statusCode === 200) {
             var results = [];
             //bighugelabs
@@ -281,12 +280,11 @@ app.post('/search', function(req, res) {
   console.log("Search requested from user");
   if(req.body.type === undefined || req.body.value === undefined) return res.send({success: false });
   var reqQuery =  req.body.value;
-  var url = "http://localhost:3000" + "/api/" + req.body.type + "/" + reqQuery;
+  var url = config.homeURL + "/api/" + req.body.type + "/" + reqQuery;
   request({
       url:  url,
       json: true
   }, function (error, response, results) {
-    console.log("Response");
     if (!error && response.statusCode === 200) {
         res.send({success: results.success, type: results.type, query: reqQuery, result: results.data, error: results.error});
     }
