@@ -30,202 +30,109 @@ app.use('/*.json', function(req, res) {
 });
 
 app.use('/example/', function(req, res) {
-  //https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=APIkey&lang=en-ru&text=time
-  //
-  console.log("Example requested from API");
   var api_results = {
-    "word": "example",
-    "results": [
-      {
-        "definition": "a representative form or pattern",
-        "partOfSpeech": "noun",
-        "synonyms": [
-          "model"
-        ],
-        "typeOf": [
-          "representation",
-          "internal representation",
-          "mental representation"
-        ],
-        "hasTypes": [
-          "prefiguration",
-          "archetype",
-          "epitome",
-          "guide",
-          "holotype",
-          "image",
-          "loadstar",
-          "lodestar",
-          "microcosm",
-          "original",
-          "paradigm",
-          "pilot",
-          "prototype",
-          "template",
-          "templet",
-          "type specimen"
-        ],
-        "derivation": [
-          "exemplify"
-        ],
-        "examples": [
-          "I profited from his example"
-        ]
-      },
-      {
-        "definition": "something to be imitated",
-        "partOfSpeech": "noun",
-        "synonyms": [
-          "exemplar",
-          "good example",
-          "model"
-        ],
-        "typeOf": [
-          "ideal"
-        ],
-        "hasTypes": [
-          "pacemaker",
-          "pattern",
-          "beauty",
-          "prodigy",
-          "beaut",
-          "pacesetter"
-        ],
-        "derivation": [
-          "exemplify",
-          "exemplary"
-        ]
-      },
-      {
-        "definition": "an occurrence of something",
-        "partOfSpeech": "noun",
-        "synonyms": [
-          "case",
-          "instance"
-        ],
-        "typeOf": [
-          "happening",
-          "natural event",
-          "occurrence",
-          "occurrent"
-        ],
-        "hasTypes": [
-          "clip",
-          "mortification",
-          "piece",
-          "time",
-          "humiliation",
-          "bit"
-        ],
-        "derivation": [
-          "exemplify"
-        ],
-        "examples": [
-          "but there is always the famous example of the Smiths"
-        ]
-      },
-      {
-        "definition": "an item of information that is typical of a class or group",
-        "partOfSpeech": "noun",
-        "synonyms": [
-          "illustration",
-          "instance",
-          "representative"
-        ],
-        "typeOf": [
-          "information"
-        ],
-        "hasTypes": [
-          "excuse",
-          "apology",
-          "specimen",
-          "case in point",
-          "sample",
-          "exception",
-          "quintessence",
-          "precedent"
-        ],
-        "derivation": [
-          "exemplify",
-          "exemplary"
-        ],
-        "examples": [
-          "this patient provides a typical example of the syndrome",
-          "there is an example on page 10"
-        ]
-      },
-      {
-        "definition": "punishment intended as a warning to others",
-        "partOfSpeech": "noun",
-        "synonyms": [
-          "deterrent example",
-          "lesson",
-          "object lesson"
-        ],
-        "typeOf": [
-          "monition",
-          "admonition",
-          "word of advice",
-          "warning"
-        ],
-        "derivation": [
-          "exemplary"
-        ],
-        "examples": [
-          "they decided to make an example of him"
-        ]
-      },
-      {
-        "definition": "a task performed or problem solved in order to develop skill or understanding",
-        "partOfSpeech": "noun",
-        "synonyms": [
-          "exercise"
-        ],
-        "typeOf": [
-          "lesson"
-        ],
-        "examples": [
-          "you must work the examples at the end of each chapter in the textbook"
-        ]
-      }
-    ],
-    "syllables": {
-      "count": 3,
-      "list": [
-        "ex",
-        "am",
-        "ple"
+    "noun": {
+      "syn": [
+        "passion",
+        "beloved",
+        "dear",
+        "dearest",
+        "honey",
+        "sexual love",
+        "erotic love",
+        "lovemaking",
+        "making love",
+        "love life",
+        "concupiscence",
+        "emotion",
+        "eros",
+        "loved one",
+        "lover",
+        "object",
+        "physical attraction",
+        "score",
+        "sex",
+        "sex activity",
+        "sexual activity",
+        "sexual desire",
+        "sexual practice"
+      ],
+      "ant": [
+        "hate"
+      ],
+      "usr": [
+        "amour"
       ]
     },
-    "pronunciation": {
-      "all": "ÉªÉ¡'zÃ¦mpÉ™l"
-    },
-    "frequency": 4.67
+    "verb": {
+      "syn": [
+        "love",
+        "enjoy",
+        "roll in the hay",
+        "make out",
+        "make love",
+        "sleep with",
+        "get laid",
+        "have sex",
+        "know",
+        "do it",
+        "be intimate",
+        "have intercourse",
+        "have it away",
+        "have it off",
+        "screw",
+        "jazz",
+        "eff",
+        "hump",
+        "lie with",
+        "bed",
+        "have a go at it",
+        "bang",
+        "get it on",
+        "bonk",
+        "copulate",
+        "couple",
+        "like",
+        "mate",
+        "pair"
+      ],
+      "ant": [
+        "hate"
+      ]
+    }
   }
   res.setHeader('Content-Type', 'application/json');
   res.send(api_results);
 });
 
 app.use('/api/*/*', function(req, res) {
-  console.log("API requested from search");
   var url = req.originalUrl.substring(5);
   var type = url.split("/")[0];
   var word = url.split("/")[1];
+  console.log("API requested, type: " + type + "; word: " + word);
   var api_url = "http://words.bighugelabs.com/api/2/" + config.dictionaryAPIToken + "/" + word + "/json";
+  //var api_url = "http://localhost:5000/example";
   switch(type) {
-    case "q":
-      break;
+    case "a":
     case "s":
       request({
           url: api_url,
           json: true
       }, function (error, response, api_results) {
         if (!error && response.statusCode === 200) {
-            var results = [];
+            var results = {};
             //bighugelabs
             for(var k in api_results) {
-              results = results.concat(api_results[k].syn)
+              for(var l in api_results[k]) {
+                if(!results[l.charAt(0)]) results[l.charAt(0)] = []
+                results[l.charAt(0)] = results[l.charAt(0)].concat(api_results[k][l]);
+              }
             };
+            for(var h in results) {
+              for(var i = 0; i < results[h].length; i++) {
+                results[h][i] = results[h][i].replace(/\s/g,"_") + "_";
+              }
+            }
             /* Wordsapi
             // for(var i = 0; i < api_results.results.length; i++) {
             //   for(var j = 0; j < api_results.results[i].synonyms.length; j++) {
@@ -233,51 +140,17 @@ app.use('/api/*/*', function(req, res) {
             //   }
             // }
             */
-            res.send({success: true, type: "synonym", data: results});
-        } else {
-          res.send({success: false, error: "API Run out or unactivated."});
+            return res.send({success: true, type: "synonym|antonym", data: results});
         }
+        return res.send({success: false, error: "Error in Foreign API", error_message: error});
       });
-      break;
-    case "a":
-      request({
-          url: api_url,
-          json: true
-      }, function (error, response, api_results) {
-        if (!error && response.statusCode === 200) {
-            var results = [];
-            //bighugelabs
-            for(var k in api_results) {
-              results = results.concat(api_results[k].ant)
-            };
-            res.send({success: true, type: "synonym", data: results});
-        } else {
-          res.send({success: false, error: "API Run out or unactivated."});
-        }
-      });
-      break;
-    case "r":
-      break;
-    case "d":
-      var results = [];
-      request({
-          url: url,
-          json: true
-      }, function (error, api_results, body) {
-        for(var i = 0; i < api_results.results.length; i++) {
-            results.push(api_results.results[i].definition);
-        }
-      })
       break;
     default:
-      error: {
-        message: "Command does not exist";
-      }
+      return res.send({success: false, error: "Command not supported."});
   }
 });
 
 app.post('/search', function(req, res) {
-  console.log("Search requested from user");
   if(req.body.type === undefined || req.body.value === undefined) return res.send({success: false });
   var reqQuery =  req.body.value;
   var url = config.homeURL + "/api/" + req.body.type + "/" + reqQuery;
@@ -286,8 +159,9 @@ app.post('/search', function(req, res) {
       json: true
   }, function (error, response, results) {
     if (!error && response.statusCode === 200) {
-        res.send({success: results.success, type: results.type, query: reqQuery, result: results.data, error: results.error});
+        return res.send({success: results.success, type: results.type, query: reqQuery, result: results.data, error: results.error});
     }
+    return res.send({success: false, error: "Error in local API.", error_message: error});
   })
 });
 
