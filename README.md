@@ -18,11 +18,13 @@ API usage, so packages are used to extract the data only once.
 
 Packages:
 - 1: bighugelabs - synonyms, antonyms and usr(?)
+- 2: datamuseAPI - Rhyme
 
 ### Commands:
 
 - 's' -> Synonym from PACKAGE 1
 - 'a' -> Antonym from PACKAGE 1
+- 'r' -> Rhyem from PACKAGE 2
 - 'u' -> ?? from PACKAGE 1
 
 ### TODO List

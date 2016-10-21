@@ -1,9 +1,77 @@
 body {
   background-color: #282C33;
-  font-size: 2em;
-}
+  display: flex;
+  align-items: stretch;
+  padding: 0;
+  margin: 0;
+  font-family: 'Hind', sans-serif; }
+
+* {
+  box-sizing: border-box; }
 
 #textarea {
   color: #AAB2B8;
   font-size: 2em;
-}
+  padding: 20px;
+  flex: 0 1 100%; }
+
+.bar {
+  flex: 0 0 30%;
+  border-left: 3px solid #AAB2B8;
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column; }
+  .bar .box {
+    padding: 10px; }
+    .bar .box.stats {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap; }
+      .bar .box.stats .time {
+        flex: 100%; }
+      .bar .box.stats .words_count {
+        flex: 50%; }
+      .bar .box.stats .commands_count {
+        flex: 50%; }
+      .bar .box.stats .last_word {
+        flex: 100%; }
+    .bar .box.logs {
+      border-top: 1px solid #AAB2B8;
+      width: 100%;
+      flex: 100;
+      overflow-y: scroll; }
+      .bar .box.logs::-webkit-scrollbar {
+        display: none; }
+      .bar .box.logs .log {
+        padding: 5px;
+        border: 1px solid black;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 5px; }
+        .bar .box.logs .log .word {
+          flex: 50%; }
+        .bar .box.logs .log .available {
+          flex: 50%; }
+          .bar .box.logs .log .available span.s:after {
+            content: 's '; }
+          .bar .box.logs .log .available span.a:after {
+            content: 'a '; }
+          .bar .box.logs .log .available span.u:after {
+            content: 'u '; }
+          .bar .box.logs .log .available span.r:after {
+            content: 'r '; }
+        .bar .box.logs .log .options {
+          flex: 100%;
+          display: flex;
+          flex-wrap: wrap; }
+          .bar .box.logs .log .options .option {
+            flex: 33%; }
+    .bar .box.credit {
+      border-top: 1px solid #AAB2B8;
+      width: 100%; }
+      .bar .box.credit .logo {
+        font-family: 'Dosis', sans-serif; }
+
+/*# sourceMappingURL=style.css.map */

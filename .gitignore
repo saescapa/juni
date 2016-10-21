@@ -1,4 +1,7 @@
 node_modules/
+database/
 config.json
 npm-debug.log
 words/
+public/style/.sass-cache
+public/style/style.css.map
